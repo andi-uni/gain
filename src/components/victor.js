@@ -17,7 +17,7 @@ initialize().then((zokratesProvider) => {
   console.log("im here init");
 
   const compileOutput = zokratesProvider.compile(
-    "def main(private field a) -> (field): return a",
+    "import \"hashes/sha256/512bitPacked\" as sha256packed\n \n def main(private field a, private field b, private field c, private field d) -> (field):\n h = sha256packed([a, b, c, d])\n h[0] == 263561599766550617289250058199814760685\n h[1] == 65303172752238645975888084098459749904\n return 1\n",
     "main",
     importResolver
   );
