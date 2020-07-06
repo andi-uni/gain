@@ -2,13 +2,9 @@ const { initialize } = require("zokrates-js-node");
 
 function importResolver(location, path) {
   // implement your resolving logic here
-  console.log("im here importResolver");
-  zokratesProvider.setup(program);
-  zokratesProvider.exportSolidityVerifier(vk, abi);
-
-  return {
-    source: "def main() -> (): return",
-    location: path,
+  return { 
+    source: "def main() -> (): return", 
+    location: path 
   };
 }
 
