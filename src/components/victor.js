@@ -23,21 +23,29 @@ function importResolver(location, path) {
 }
 
 initialize().then((zokratesProvider) => {
-  //const compileOutput = zokratesProvider.compile( "import \"hashes/sha256/512bitPacked\" as sha256packed\n \n def main(private field a, private field b, private field c, private field d) -> (field):\n field[2] h = sha256packed([a, b, c, d])\n h[0] == 263561599766550617289250058199814760685\n h[1] == 65303172752238645975888084098459749904\n return 1\n", "main", importResolver);
-  
-  // for faster testing
+    
+compileOutput = null;
+try{
   compileOutput = JSON.parse(fs.readFileSync("compile.out"));
-  setupOutput = JSON.parse(fs.readFileSync("setup.out"));
+} catch(e) {
+  console.log("Compiling ...");
+    compileOutput = zokratesProvider.compile( "import \"hashes/sha256/512bitPacked\" as sha256packed\n \n def main(private field a, private field b, private field c, private field d) -> (field):\n field[2] h = sha256packed([a, b, c, d])\n h[0] == 263561599766550617289250058199814760685\n h[1] == 65303172752238645975888084098459749904\n return 1\n", "main", importResolver);
+    writeObject("compile.out",compileOutput);
+}
 
-  //writeObject("compile.out",compileOutput);
-  //const setupOutput = zokratesProvider.setup(compileOutput.program);
-  //writeObject("setup.out",setupOutput);
+try{
+  setupOutput = JSON.parse(fs.readFileSync("setup.out"));
+} catch(e) {
+  console.log("Setting up...");
+  const setupOutput = zokratesProvider.setup(compileOutput.program);
+  writeObject("setup.out",setupOutput);
+}
   
   const verifier = zokratesProvider.exportSolidityVerifier(
     setupOutput.vk,
     true
   );
-  // writeObject("verifier.out",verifier);
+  writeObject("verifier.out",verifier);
 
   // compile verifier
   var input = {
@@ -73,7 +81,7 @@ initialize().then((zokratesProvider) => {
 
   Contract.deploy()
   .send({
-    from: '0x6E70D2B6d2368bbEA614408DD1aF17DB2CE1970c',
+    from: '0x82869bFc3d09B17a52D6c215A6618A5473827588',
     gas: 1500000,
     gasPrice: '30000000000000'
   })
