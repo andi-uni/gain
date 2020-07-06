@@ -19,6 +19,14 @@ initialize().then((zokratesProvider) => {
   console.log(compileOutput)
   witness = zokratesProvider.computeWitness(compileOutput, ['0', '0', '0', '5']); //Was sollte hier übergeben werden?
   // output comprises witness and output
+  fs = require('fs')
   proovingKey = 0
-  proof = zokratesProvider.generateProof(compileOutput.program, witness.witness, proovingKey) // proving Key is handed over from victor
+  fs.readFile('./pk', 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    provingKey = data;
+    console.log(data);
+    proof = zokratesProvider.generateProof(compileOutput.program, witness.witness, proovingKey) // proving Key is handed over from victor
+  });
 });
