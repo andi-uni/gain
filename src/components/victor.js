@@ -1,4 +1,4 @@
-const { initialize } = require("zokrates-js-node");
+import { initialize } from "zokrates-js";
 let Web3 = require('web3');
 let solc = require('solc');  // solidity compiler bindings
 let fs = require('fs-extra');
@@ -26,8 +26,8 @@ initialize().then((zokratesProvider) => {
   //const compileOutput = zokratesProvider.compile( "import \"hashes/sha256/512bitPacked\" as sha256packed\n \n def main(private field a, private field b, private field c, private field d) -> (field):\n field[2] h = sha256packed([a, b, c, d])\n h[0] == 263561599766550617289250058199814760685\n h[1] == 65303172752238645975888084098459749904\n return 1\n", "main", importResolver);
   
   // for faster testing
-  compileOutput = JSON.parse(fs.readFileSync("compile.out"));
-  setupOutput = JSON.parse(fs.readFileSync("setup.out"));
+  let compileOutput = JSON.parse(fs.readFileSync("compile.out"));
+  let setupOutput = JSON.parse(fs.readFileSync("setup.out"));
 
   //writeObject("compile.out",compileOutput);
   //const setupOutput = zokratesProvider.setup(compileOutput.program);
@@ -73,7 +73,7 @@ initialize().then((zokratesProvider) => {
 
   Contract.deploy()
   .send({
-    from: '0x6E70D2B6d2368bbEA614408DD1aF17DB2CE1970c',
+    from: '0x6E70D2B6d2368bbEA614408DD1aF17DB2CE1970c', // add address here
     gas: 1500000,
     gasPrice: '30000000000000'
   })
