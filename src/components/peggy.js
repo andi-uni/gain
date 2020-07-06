@@ -30,8 +30,7 @@ initialize().then((zokratesProvider) => {
   );
   witness = zokratesProvider.computeWitness(compileOutput, ['0', '0', '0', '5']);
   setup = readObject("setup.out");
-  console.log(setup.pk);
   provingKey = setup.pk;
   proof = zokratesProvider.generateProof(compileOutput.program, witness.witness, provingKey) // proving Key is handed over from victor
-  console.log(proof);
+  writeObject("proof.out",proof);
 });
