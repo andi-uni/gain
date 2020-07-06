@@ -32,4 +32,4 @@ initialize().then((zokratesProvider) => {
     true
   );
   writeObject("verifier.out",verifier);
-});
+}).catch((err) => console.log(err));
