@@ -28,7 +28,7 @@ direction_selector = list()
 path_digest = list()
 
 next_child = leaf
-for i in range(0,17):
+for i in range(0,17+1): #+1 for root node
     direction, next_child = generate_random_junction(next_child)
     direction_selector.append(direction)
     path_digest.append(next_child)
