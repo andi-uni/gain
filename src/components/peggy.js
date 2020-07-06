@@ -1,14 +1,13 @@
-const { initialize } = require("zokrates-js-node");
+import { initialize } from "zokrates-js";
+fs = require('fs-extra');
 
 function writeObject(filename,object) {
-  fs = require('fs');
   fs.writeFileSync(filename, JSON.stringify(object));
   console.log('Write to ...');
   console.log(filename);
 } 
 
 function readObject(filename) {
-  fs = require('fs')
   return JSON.parse(fs.readFileSync(filename, 'utf8'));
 }
 
