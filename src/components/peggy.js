@@ -28,17 +28,10 @@ initialize().then((zokratesProvider) => {
     "main",
     importResolver
   );
-  console.log(compileOutput)
-  witness = zokratesProvider.computeWitness(compileOutput, ['0', '0', '0', '5']); //Was sollte hier übergeben werden?
-  // output comprises witness and output
-  fs = require('fs')
-  proovingKey = 0
-  fs.readFile('./pk', 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    provingKey = data;
-    console.log(data);
-    proof = zokratesProvider.generateProof(compileOutput.program, witness.witness, proovingKey) // proving Key is handed over from victor
-  });
+  witness = zokratesProvider.computeWitness(compileOutput, ['0', '0', '0', '5']);
+  setup = readObject("setup.out");
+  console.log(setup.pk);
+  provingKey = setup.pk;
+  proof = zokratesProvider.generateProof(compileOutput.program, witness.witness, provingKey) // proving Key is handed over from victor
+  console.log(proof);
 });
