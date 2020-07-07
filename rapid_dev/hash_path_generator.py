@@ -2,6 +2,11 @@ import hashlib
 import random
 import binascii
 
+def print_big_endian_split(little):
+    l.l = split(little)
+    l.r = split(little)
+    rerturn little1, little2
+
 def generate_random_hash():
     return bytearray((random.getrandbits(8) for i in range(0,32)))
 
@@ -28,7 +33,7 @@ direction_selector = list()
 path_digest = list()
 
 next_child = leaf
-for i in range(0,17+1): #+1 for root node
+for i in range(0,2+1): #+1 for root node
     direction, next_child = generate_random_junction(next_child)
     direction_selector.append(direction)
     path_digest.append(next_child)
