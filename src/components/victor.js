@@ -91,6 +91,7 @@ try{
   })
   .then(function(newContractInstance){
       console.log(newContractInstance.options.address) // instance with the new contract address
+      writeObject('contractAddress.out', newContractInstance.options.address)
   });
 
 });
