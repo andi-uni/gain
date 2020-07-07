@@ -39,12 +39,12 @@ for i in range(0,2): #+1 for root node
     path_digest.append(pd)
 
 
-print("leaf:", ([int.from_bytes(x,'big') for x in make_little_big(leaf)]))
+print("leaf:", ([int.from_bytes(x,'little') for x in make_little_big(leaf)]))
 for i in range(0,len(direction_selector)):
     if direction_selector[i]==True:
         d = "Left"
     else:
         d="Right"
-    print('Digest',i,':',d,[int.from_bytes(x,'big') for x in make_little_big(path_digest[i])])
+    print('Digest',i,':',d,[int.from_bytes(x,'little') for x in make_little_big(path_digest[i])])
 
-print("Root:", [int.from_bytes(x,'big') for x in make_little_big(next_child)])
+print("Root:", [int.from_bytes(x,'little') for x in make_little_big(next_child)])
