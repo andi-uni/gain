@@ -32,7 +32,7 @@ initialize().then((zokratesProvider) => {
     language: 'Solidity',
     sources: {
       'verifier.sol': {
-        content: fs.readFileSync("verifier.sol","utf8")
+        content: fs.readFileSync("../contracts/verifier.sol","utf8")
       }
     },
     settings: {
