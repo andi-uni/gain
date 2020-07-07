@@ -60,25 +60,58 @@ initialize().then((zokratesProvider) => {
 
   let Contract = web3.eth.Contract(contract.abi, contractAddress);
 
+  fs.outputJsonSync('proof.json', JSON.parse(proof))
+
   let p = JSON.parse(proof).proof
   // console.log(contract.abi)
-  // console.log(p)
+  // console.log(JSON.parse(proof))
+
+  let inputs = JSON.parse(proof).inputs;
 
 
+  // console.log(uint256(inputs))
+  // // 'verifyTx(((p.a[0], p.a[1]),([p.b[0][0], p.b[0][1]],[p.b[1][0], p.b[1][1]]) (p.c[0]),p.c[1])),uint256[1])'
 
-  let inputs = '0x0000000000000000000000000000000000000000000000000000000000000001';
-  // 'verifyTx(((p.a[0], p.a[1]),([p.b[0][0], p.b[0][1]],[p.b[1][0], p.b[1][1]]) (p.c[0]),p.c[1])),uint256[1])'
+  // console.log([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]], [p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]], inputs)
 
-  console.log([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]], [p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]], inputs)
+  //let x = ((0,0),([2,2], [2,2]),(0,0)),[0]
 
-  console.log(Contract.methods.verifyTx([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]], [p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]], inputs).send({
+  // (p.a[0], p.a[1]),([p.b[0][0],p.b[0][1]], [p.b[1][0],p.b[1][1]]),(p.c[0] ,p.c[1])
+  Contract.methods.verifyTx([[4, 42], 
+                            [[42, 42], [42, 42]], 
+                            [42, 42]], 
+                            [parseInt(inputs)])
+  .send({
     from: PEGGY_ADR,
     gas: 100000,
-    gasPrice: 0
-  }));
+    gasPrice: 1000
+  });
   // for (let i in Contract.methods.contract) console.log(i)
 
 
 
   
 });
+
+
+
+// UnhandledPromiseRejectionWarning: Error: types/values length mismatch 
+// (count={"types":2,"values":4}, 
+// value={"types":[{"components":[{"components":[
+//   {"internalType":"uint256","name":"X","type":"uint256"},
+//   {"internalType":"uint256","name":"Y","type":"uint256"}],
+//   "internalType":"struct Pairing.G1Point","name":"a","type":"tuple"},
+//   {"components":[{"internalType":"uint256[2]","name":"X","type":"uint256[2]"},
+//   {"internalType":"uint256[2]","name":"Y","type":"uint256[2]"}],
+//   "internalType":"struct Pairing.G2Point","name":"b","type":"tuple"},
+//   {"components":[{"internalType":"uint256","name":"X","type":"uint256"},
+//   {"internalType":"uint256","name":"Y","type":"uint256"}],
+//   "internalType":"struct Pairing.G1Point","name":"c","type":"tuple"}],
+//   "internalType":"struct Verifier.Proof","name":"proof","type":"tuple"},
+//   {"internalType":"uint256[1]","name":"input","type":"uint256[1]"}],
+//   "values":[
+//     "0x1d3f567420a9f5508ba79005719575ad52a417befedaa9f741da77cd077e7295",
+//     "0x1d3f567420a9f5508ba79005719575ad52a417befedaa9f741da77cd077e7295",
+//     "0x1d3f567420a9f5508ba79005719575ad52a417befedaa9f741da77cd077e7295",
+//     "0x1d3f567420a9f5508ba79005719575ad52a417befedaa9f741da77cd077e7295"]}, 
+//     version=4.0.32)
