@@ -77,10 +77,23 @@ initialize().then((zokratesProvider) => {
   //let x = ((0,0),([2,2], [2,2]),(0,0)),[0]
 
   // (p.a[0], p.a[1]),([p.b[0][0],p.b[0][1]], [p.b[1][0],p.b[1][1]]),(p.c[0] ,p.c[1])
-  Contract.methods.verifyTx([[4, 42], 
-                            [[42, 42], [42, 42]], 
-                            [42, 42]], 
-                            [parseInt(inputs)])
+  let a0 = web3.eth.abi.encodeParameter('uint256',p.a[0])
+  let a1 = web3.eth.abi.encodeParameter('uint256',p.a[1])
+
+  let b00 = web3.eth.abi.encodeParameter('uint256',p.b[0][0])
+  let b01 = web3.eth.abi.encodeParameter('uint256',p.b[0][1])
+  let b10 = web3.eth.abi.encodeParameter('uint256',p.b[1][0])
+  let b11 = web3.eth.abi.encodeParameter('uint256',p.b[1][1])
+
+  let c0 = web3.eth.abi.encodeParameter('uint256',p.c[0])
+  let c1 = web3.eth.abi.encodeParameter('uint256',p.c[1])
+
+  let inp = web3.eth.abi.encodeParameter('uint256',inputs)
+
+  Contract.methods.verifyTx([[a0, a1], 
+                            [[b00, b01], [b10, b11]], 
+                            [c0, c1]], 
+                            [inp])
   .send({
     from: PEGGY_ADR,
     gas: 100000,
