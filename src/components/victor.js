@@ -1,8 +1,11 @@
-import { initialize } from "zokrates-js";
+import { initialize } from "zokrates-js-node";
 let Web3 = require('web3');
 let solc = require('solc');  // solidity compiler bindings
 let fs = require('fs-extra');
 
+
+let VICTOR_ADR = '0xc31Eb6E317054A79bb5E442D686CB9b225670c1D'
+let PEGGY_ADR = '0x97026a8157f39101aefc4A81496C161a6b1Ce46A'
 
 function writeObject(filename,object) {
   fs.writeFileSync(filename, JSON.stringify(object));
@@ -83,7 +86,7 @@ try{
 
   Contract.deploy()
   .send({
-    from: '0x6E70D2B6d2368bbEA614408DD1aF17DB2CE1970c', // add address here
+    from: VICTOR_ADR, // add address here
     gas: 1500000,
     gasPrice: '30000000000000'
   })

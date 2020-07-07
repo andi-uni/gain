@@ -1,5 +1,8 @@
-import { initialize } from "zokrates-js";
+import { initialize } from "zokrates-js-node";
 let fs = require('fs-extra');
+
+let VICTOR_ADR = '0xc31Eb6E317054A79bb5E442D686CB9b225670c1D'
+let PEGGY_ADR = '0x97026a8157f39101aefc4A81496C161a6b1Ce46A'
 
 function writeObject(filename,object) {
   fs.writeFileSync(filename, JSON.stringify(object));
