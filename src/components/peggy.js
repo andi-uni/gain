@@ -61,15 +61,17 @@ initialize().then((zokratesProvider) => {
   let Contract = web3.eth.Contract(contract.abi, contractAddress);
 
   let p = JSON.parse(proof).proof
-  console.log(contract.abi)
-  console.log(p)
+  // console.log(contract.abi)
+  // console.log(p)
 
 
 
   let inputs = '0x0000000000000000000000000000000000000000000000000000000000000001';
   // 'verifyTx(((p.a[0], p.a[1]),([p.b[0][0], p.b[0][1]],[p.b[1][0], p.b[1][1]]) (p.c[0]),p.c[1])),uint256[1])'
 
-  console.log(Contract.methods.verifyTx([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]],[p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]],inputs).send({
+  console.log([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]], [p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]], inputs)
+
+  console.log(Contract.methods.verifyTx([p.a[0], p.a[1]], [[p.b[0][0], p.b[0][1]], [p.b[1][0], p.b[1][1]]], [p.c[0] ,p.c[1]], inputs).send({
     from: PEGGY_ADR,
     gas: 100000,
     gasPrice: 0
