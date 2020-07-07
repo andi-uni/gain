@@ -1,16 +1,11 @@
 {
   "inputs": [
     {
-      "name": "treeDepth",
-      "public": true,
-      "type": "field"
-    },
-    {
       "name": "rootDigest",
       "public": true,
       "type": "array",
       "components": {
-        "size": 256,
+        "size": 2,
         "type": "field"
       }
     },
@@ -19,7 +14,7 @@
       "public": false,
       "type": "array",
       "components": {
-        "size": 256,
+        "size": 2,
         "type": "field"
       }
     },
@@ -37,7 +32,7 @@
       "public": true,
       "type": "array",
       "components": {
-        "size": 256,
+        "size": 2,
         "type": "field"
       }
     },
@@ -46,7 +41,7 @@
       "public": false,
       "type": "array",
       "components": {
-        "size": 256,
+        "size": 2,
         "type": "field"
       }
     }
