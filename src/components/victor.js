@@ -32,7 +32,7 @@ initialize().then((zokratesProvider) => {
     language: 'Solidity',
     sources: {
       'verifier.sol': {
-        content: fs.readFileSync("../contracts/verifier.sol","utf8")
+        content: fs.readFileSync("verifier.sol","utf8")
       }
     },
     settings: {
@@ -55,6 +55,8 @@ initialize().then((zokratesProvider) => {
 
   let abi = contract.abi;
   let code = '0x' + contract.evm.bytecode.object;
+
+  console.log(abi)
 
   let Contract = web3.eth.Contract(abi);
   Contract.options.data = code;
